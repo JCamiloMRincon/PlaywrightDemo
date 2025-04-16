@@ -1,4 +1,3 @@
-using Microsoft.Playwright;
 using PlaywrightDemo.Config;
 using PlaywrightDemo.Driver;
 
@@ -6,34 +5,37 @@ namespace PlaywrightDemo
 {
     public class Tests
     {
-        private IPage _page;
         private PlaywrightDriver _driver;
+        private IPlaywrightDriverInitializer _initializer;
 
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
             TestSettings testSettings = new TestSettings()
             {
-                Channel = "firefox",
-                SlowMo = 1500,
+                SlowMo = 0,
                 Headless = false,
                 DriverType = DriverType.Firefox
             };
 
-            _driver = new PlaywrightDriver();
-            _page = await _driver.InitializePlaywrightAsync(testSettings);
+            _initializer = new PlaywrightDriverInitializer();
+            _driver = new PlaywrightDriver(testSettings, _initializer);
         }
 
         [Test]
         public async Task Test1()
         {
-            await _page.ClickAsync("text=Privacy");
+            var page = await _driver.Page;
+            await page.GotoAsync("http://localhost:33084/");
+            await page.ClickAsync("text=Privacy");
         }
 
         [Test]
         public async Task Test2()
         {
-            await _page.ClickAsync("text=Product");
+            var page = await _driver.Page;
+            await page.GotoAsync("http://localhost:33084/");
+            await page.ClickAsync("text=Product");
         }
 
         [TearDown]
@@ -41,8 +43,9 @@ namespace PlaywrightDemo
         {
             // Code to tear-down the Playwright browser, browserContext
             // and disponse the resources.
-            await _driver.Browser.CloseAsync();
-            await _driver.Browser.DisposeAsync();
+            var browser = await _driver.Browser;
+            await browser.CloseAsync();
+            await browser.DisposeAsync();
         }
     }
 }

@@ -5,39 +5,51 @@ namespace PlaywrightDemo.Driver
 {
     public class PlaywrightDriver
     {
-        public IBrowser Browser;
-        public IBrowserContext BrowserContext;
+        private readonly AsyncTask<IBrowser> _browser;
+        private readonly AsyncTask<IBrowserContext> _browserContext;
+        private readonly AsyncTask<IPage> _page;
+        private readonly TestSettings _settings;
+        private readonly IPlaywrightDriverInitializer _plawrightDriverInitializer;
 
-        public async Task<IBrowser> GetBrowserAsync(TestSettings settings) 
+        public PlaywrightDriver(TestSettings settings, IPlaywrightDriverInitializer plawrightDriverInitializer)
         {
-            var playwrightDriver = await Playwright.CreateAsync();
+            _settings = settings;
+            _plawrightDriverInitializer = plawrightDriverInitializer;
 
-            var browserOption = new BrowserTypeLaunchOptions() 
-            {
-                Headless = settings.Headless,
-                Channel = settings.Channel,
-                SlowMo = settings.SlowMo
-            };
+            // Method groups in C#
+            // https://www.delftstack.com/howto/csharp/method-groups-in-csharp/
+            _browser = new AsyncTask<IBrowser>(InitializePlaywrightAsync);
+            _browserContext = new AsyncTask<IBrowserContext>(CreateBrowserContextAsync);
+            _page = new AsyncTask<IPage>(CreatePageAsync);
+            _plawrightDriverInitializer = plawrightDriverInitializer;
+        }
 
-            return settings.DriverType switch
+        // Apply the encapsultation principle of OOPs.
+        public Task<IPage> Page => _page.Value;
+        public Task<IBrowser> Browser => _browser.Value;
+        public Task<IBrowserContext> BrowserContext => _browserContext.Value;
+
+        private async Task<IBrowser> InitializePlaywrightAsync() 
+        {
+            return _settings.DriverType switch
             {
-                DriverType.Chrome => await playwrightDriver["chrome"].LaunchAsync(browserOption),
-                DriverType.Chromium => await playwrightDriver.Chromium.LaunchAsync(browserOption),
-                DriverType.Edge => await playwrightDriver["edge"].LaunchAsync(browserOption),
-                DriverType.Firefox => await playwrightDriver.Firefox.LaunchAsync(browserOption),
-                DriverType.Webkit => await playwrightDriver.Webkit.LaunchAsync(browserOption),
-                _ => throw new NotImplementedException($"The driver type {settings.DriverType} doesn't exist.")
+                DriverType.Chrome => await _plawrightDriverInitializer.GetChromeDriverAsync(_settings),
+                DriverType.Chromium => await _plawrightDriverInitializer.GetChromiumDriverAsync(_settings),
+                DriverType.Edge => await _plawrightDriverInitializer.GetEdgeDriverAsync(_settings),
+                DriverType.Firefox => await _plawrightDriverInitializer.GetFirefoxDriverAsync(_settings),
+                DriverType.Webkit => await _plawrightDriverInitializer.GetWebKitDriverAsync(_settings),
+                _ => throw new NotImplementedException($"The driver type {_settings.DriverType} doesn't exist.")
             };
         }
 
-        public async Task<IPage> InitializePlaywrightAsync(TestSettings settings) 
-        {
-            Browser = await GetBrowserAsync(settings);
-            BrowserContext = await Browser.NewContextAsync();
-            var page = await BrowserContext.NewPageAsync();
+        private async Task<IBrowserContext> CreateBrowserContextAsync() 
+        { 
+            return await (await _browser).NewContextAsync();
+        }
 
-            await page.GotoAsync("http://localhost:33084/");
-            return page;
+        private async Task<IPage> CreatePageAsync() 
+        {
+            return await (await _browserContext).NewPageAsync();
         }
     }
 }

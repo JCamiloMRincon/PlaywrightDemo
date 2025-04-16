@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaywrightDemo", "PlaywrightDemo\PlaywrightDemo.csproj", "{0C8FECE2-7464-482A-8370-C7737D426C5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAApplicationTest", "EATestAutomation\EAApplicationTest.csproj", "{88EAFEAD-2ED4-419B-8F48-E6027FAAD0C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAFramework", "EAFramework\EAFramework.csproj", "{AA0B13D5-06A8-47F5-BFFE-606A26D37BAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{0C8FECE2-7464-482A-8370-C7737D426C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C8FECE2-7464-482A-8370-C7737D426C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C8FECE2-7464-482A-8370-C7737D426C5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EAFEAD-2ED4-419B-8F48-E6027FAAD0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EAFEAD-2ED4-419B-8F48-E6027FAAD0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EAFEAD-2ED4-419B-8F48-E6027FAAD0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EAFEAD-2ED4-419B-8F48-E6027FAAD0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA0B13D5-06A8-47F5-BFFE-606A26D37BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA0B13D5-06A8-47F5-BFFE-606A26D37BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA0B13D5-06A8-47F5-BFFE-606A26D37BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA0B13D5-06A8-47F5-BFFE-606A26D37BAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

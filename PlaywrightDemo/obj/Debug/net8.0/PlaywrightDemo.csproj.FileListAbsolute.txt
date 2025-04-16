@@ -436,3 +436,4 @@ C:\Users\CamiloMortigo\OneDrive - EPAM\Documents\PlaywrightDemo\PlaywrightDemo\o
 C:\Users\CamiloMortigo\OneDrive - EPAM\Documents\PlaywrightDemo\PlaywrightDemo\obj\Debug\net8.0\PlaywrightDemo.pdb
 C:\Users\CamiloMortigo\OneDrive - EPAM\Documents\PlaywrightDemo\PlaywrightDemo\obj\Debug\net8.0\PlaywrightDemo.genruntimeconfig.cache
 C:\Users\CamiloMortigo\OneDrive - EPAM\Documents\PlaywrightDemo\PlaywrightDemo\obj\Debug\net8.0\ref\PlaywrightDemo.dll
+C:\Users\CamiloMortigo\OneDrive - EPAM\Documents\PlaywrightDemo\PlaywrightDemo\obj\Debug\net8.0\PlaywrightDemo.sourcelink.json
