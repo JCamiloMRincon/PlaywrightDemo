@@ -6,35 +6,30 @@ namespace PlaywrightDemo
     public class Tests : IClassFixture<PlaywrightDriverInitializer>
     {
         private PlaywrightDriver _playwrightDriver;
+        private TestSettings _testSettings;
         private IPlaywrightDriverInitializer _playwrightInitializer;
 
         public Tests(PlaywrightDriverInitializer playwrightDriverInitializer)
         {
-            TestSettings testSettings = new TestSettings()
-            {
-                SlowMo = 0,
-                Headless = false,
-                DriverType = DriverType.Firefox
-            };
-
+            _testSettings = ConfigReader.ReadConfig();
             _playwrightInitializer = playwrightDriverInitializer;
-            _playwrightDriver = new PlaywrightDriver(testSettings, _playwrightInitializer);
+            _playwrightDriver = new PlaywrightDriver(_testSettings, _playwrightInitializer);
         }
 
         [Fact]
         public async Task Test1()
         {
             var page = await _playwrightDriver.Page;
-            await page.GotoAsync("http://localhost:33084/");
-            await page.ClickAsync("text=Privacy");
+            await page.GotoAsync(_testSettings.ApplicationUrl);
+            await page.ClickAsync("text=Login");
         }
 
         [Fact]
         public async Task Test2()
         {
             var page = await _playwrightDriver.Page;
-            await page.GotoAsync("http://localhost:33084/");
-            await page.ClickAsync("text=Product");
+            await page.GotoAsync(_testSettings.ApplicationUrl);
+            await page.ClickAsync("text=Register");
         }
     }
 }
