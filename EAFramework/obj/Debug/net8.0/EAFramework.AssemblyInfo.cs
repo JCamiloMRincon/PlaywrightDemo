@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EAFramework")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5809a9751882f0e3d2a163f5c1eaf5b104bee771")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8609a984be5ed62656565616ad679fe95a06a2cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("EAFramework")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EAFramework")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
